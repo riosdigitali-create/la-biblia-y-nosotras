@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Biblia y Nosotras | Movimiento de Fe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            pink: '#DF5D8A',
+                            hotpink: '#F7537A',
+                            magenta: '#A61357',
+                            plum: '#450920',
+                            yellow: '#F9DC38',
+                            beige: '#F9F6F1',
+                            dark: '#0A0A0A',
+                            terracotta: '#B05B4D'
+                        }
+                    },
+                    fontFamily: {
+                        'brooklyn': ['Brooklyn', 'sans-serif'],
+                        'baskerville': ['LibreBaskerville', 'serif'],
+                        'aloevera': ['Aloevera', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @font-face { font-family: 'Brooklyn'; src: url('Brooklyn-SemiBold.otf') format('opentype'); font-display: swap; }
+        @font-face { font-family: 'LibreBaskerville'; src: url('LibreBaskerville-Bold.ttf') format('truetype'); font-display: swap; }
+        @font-face { font-family: 'Aloevera'; src: url('AloeveraDisplay-Medium.otf') format('opentype'); font-display: swap; }
+        
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Brooklyn', sans-serif; overflow-x: hidden; }
+        .bg-section { background-size: cover; background-position: center; background-attachment: fixed; position: relative; }
+        
+        /* =========================================================
+           🚀 OPTIMIZACIÓN MÓVIL ZIV CREATIVO (PORTADA SIN CORTES)
+           ========================================================= */
+        @media (max-width: 768px) {
+            .bg-section {
+                /* Fix vital para evitar bugs visuales y de zoom en Safari/iOS */
+                background-attachment: scroll; 
+            }
+            #inicio {
+                background-size: contain; /* Muestra toda la imagen sin cortar */
+                background-repeat: no-repeat;
+                background-position: top center;
+                /* Eliminamos el min-h-screen para que se adapte a la imagen */
+                min-height: 55vh; 
+                margin-top: 80px; /* Espacio para que el navbar no tape el diseño */
+            }
+        }
+
+        .nav-hidden { transform: translateY(-100%); opacity: 0; }
+
+        #typewriter-text { transition: opacity 0.8s ease-in-out; }
+        .cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            margin-left: 4px;
+            color: #F9DC38;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Estilos Premium Instagram */
+        .ig-premium-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(223, 93, 138, 0.2);
+        }
+        .ig-profile-pic {
+            border: 3px solid #F9DC38; 
+            box-shadow: 0 6px 15px rgba(249, 220, 56, 0.3);
+            background-color: #ffffff;
+        }
+        .ig-post-premium {
+            aspect-ratio: 1 / 1;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+            position: relative;
+            background-color: #f4ecec;
+        }
+        .ig-post-premium:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        .ig-post-premium:hover img, .ig-post-premium:hover video {
+            transform: scale(1.05);
+        }
+        .ig-post-premium img, .ig-post-premium video {
+            transition: transform 0.8s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .btn-ig-premium {
+            background: linear-gradient(90deg, #DF5D8A 0%, #A61357 100%);
+            border: 2px solid #F9DC38;
+            box-shadow: 0 8px 25px rgba(223, 93, 138, 0.4);
+            transition: all 0.3s ease;
+        }
+        .btn-ig-premium:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 30px rgba(223, 93, 138, 0.6);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow selection:text-brand-dark">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 px-8 flex justify-between items-center backdrop-blur-md bg-black/10">
+        <a href="#inicio">
+            <img src="LaBibliayNosotras-03.jpg" alt="Logo Nav" class="h-10 md:h-14 brightness-0 invert">
+        </a>
+        <div class="flex items-center space-x-12">
+            <div class="hidden md:flex space-x-10 text-[10px] font-black uppercase tracking-[0.4em]">
+                <a href="#inicio" class="hover:text-brand-yellow transition-colors">Inicio</a>
+                <a href="#arena" class="hover:text-brand-yellow transition-colors">Arena CDMX</a>
+            </div>
+            <a href="#registro" class="bg-brand-yellow text-brand-dark px-8 py-3 text-[10px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-[4px_4px_0px_#450920]">
+                REGISTRO
+            </a>
+        </div>
+    </nav>
+
+    <header id="inicio" class="bg-section flex items-center justify-center px-6 md:min-h-screen" style="background-image: url('02.jpg');"></header>
+
+    <section id="historia" class="relative py-24 md:py-48 bg-brand-dark overflow-hidden flex items-center justify-center min-h-screen">
+        <video src="video.mp4" autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover opacity-20 grayscale hover:grayscale-0 transition-all duration-1000"></video>
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-plum/40 via-transparent to-brand-dark/90"></div>
+        <div class="relative z-10 text-center px-6 max-w-5xl mx-auto min-h-[500px] flex flex-col justify-center items-center">
+            <div id="typewriter-text" class="font-baskerville italic text-2xl md:text-4xl text-white/95 leading-relaxed min-h-[150px] cursor"></div>
+            <div id="final-signature" class="hidden opacity-0 transform translate-y-10 transition-all duration-1000">
+                <p class="text-6xl md:text-8xl -rotate-2">
+                    <span class="font-brooklyn text-brand-hotpink">Con amor,</span> 
+                    <span class="font-aloevera text-white">Michelle Ruiz</span>
+                </p>
+                <p class="font-brooklyn text-[10px] uppercase tracking-[0.5em] text-white/40 mt-6">Fundadora | La Biblia y Nosotras</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="instagram" class="bg-section relative py-32 px-6 flex justify-center items-center min-h-[80vh]" style="background-image: url('03.jpg');">
+        
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="absolute inset-0 bg-brand-plum/30 mix-blend-multiply"></div>
+
+        <div class="ig-premium-card w-full max-w-5xl p-8 md:p-14 relative z-10" data-aos="zoom-in" data-aos-duration="1000">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6 text-center md:text-left">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="ig-profile-pic w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden shrink-0 flex items-center justify-center p-1">
+                        <img src="LaBibliayNosotras-03.jpg" alt="Logo Instagram" class="w-full h-full object-cover rounded-full">
+                    </div>
+                    <div>
+                        <h2 class="font-brooklyn font-black text-brand-dark text-3xl md:text-4xl uppercase tracking-tighter leading-none mb-2">SÍGUENOS EN <br class="hidden md:block">INSTAGRAM</h2>
+                        <p class="font-baskerville italic text-brand-magenta text-xl">@labibliaynosotras</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-12" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" class="ig-post-premium block rounded-2xl md:rounded-3xl overflow-hidden">
+                    <img src="pro.jpg" alt="Post 1">
+                </a>
+                
+                <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" class="ig-post-premium block rounded-2xl md:rounded-3xl overflow-hidden">
+                    <img src="pro1.jpg" alt="Post 2">
+                </a>
+                
+                <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" class="ig-post-premium block rounded-2xl md:rounded-3xl overflow-hidden">
+                    <video src="video.mp4" autoplay loop muted playsinline></video>
+                </a>
+                
+                <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" class="ig-post-premium block rounded-2xl md:rounded-3xl overflow-hidden">
+                    <img src="pro2.jpg" alt="Post 4">
+                </a>
+            </div>
+
+            <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" class="btn-ig-premium inline-block text-white font-brooklyn font-black uppercase tracking-widest text-[11px] md:text-sm px-10 py-5 md:py-6 rounded-full w-full md:w-auto">
+                    IR A INSTAGRAM &rarr; @LABIBLIAYNOSOTRAS
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="arena" class="bg-section py-56 px-6 border-y-[12px] border-brand-dark" style="background-image: url('01.jpg');">
+        <div class="absolute inset-0 bg-brand-magenta/30 mix-blend-multiply"></div>
+        <div class="relative z-10 max-w-5xl mx-auto text-center" data-aos="fade-up">
+            <h2 class="font-brooklyn font-black text-white text-6xl md:text-[9rem] uppercase tracking-tighter leading-[0.8] mb-10">Arena <br><span class="text-brand-yellow">CDMX</span></h2>
+            <p class="font-baskerville italic text-2xl md:text-4xl text-white mb-16">Preventa exclusiva — 8 de marzo.</p>
+        </div>
+    </section>
+
+    <section id="registro" class="bg-section py-40 flex flex-col items-center justify-center text-center px-6" style="background-image: url('04.jpg');">
+        <div class="absolute inset-0 bg-brand-plum/60 mix-blend-multiply"></div>
+        <div class="relative z-10 w-full max-w-3xl" data-aos="fade-up">
+            <h2 class="font-brooklyn font-black text-white text-4xl md:text-7xl uppercase tracking-tighter mb-10 leading-none">Una mujer en la Palabra levanta generaciones.</h2>
+            <form class="space-y-6 bg-black/20 p-8 md:p-16 backdrop-blur-xl border border-white/10">
+                <p class="font-brooklyn font-black text-brand-yellow uppercase tracking-[0.4em] text-xs mb-8">Preventa exclusiva — 8 de marzo</p>
+                <input type="text" placeholder="NOMBRE COMPLETO" class="w-full bg-white/5 border-b-2 border-white/30 px-4 py-5 text-white placeholder-white/40 font-bold uppercase text-xs focus:outline-none focus:border-brand-yellow transition-all">
+                <input type="email" placeholder="CORREO ELECTRÓNICO" class="w-full bg-white/5 border-b-2 border-white/30 px-4 py-5 text-white placeholder-white/40 font-bold uppercase text-xs focus:outline-none focus:border-brand-yellow transition-all">
+                <button class="w-full bg-brand-yellow text-brand-dark py-6 font-black uppercase tracking-[0.3em] text-sm hover:bg-white transition-all shadow-2xl mt-8">Registrarme</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark py-20 px-8 text-center text-white/30">
+        <div class="max-w-7xl mx-auto flex flex-col items-center">
+            <img src="LaBibliayNosotras-03.jpg" class="h-12 mb-12 brightness-0 invert opacity-40">
+            <p class="font-baskerville italic text-[11px] uppercase tracking-widest">© 2026 La Biblia y Nosotras — Pintando la Palabra de color.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 1200 });
+
+        const navbar = document.getElementById('navbar');
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) { navbar.classList.add('nav-hidden'); } 
+            else { navbar.classList.remove('nav-hidden'); }
+            if (window.scrollY > 50) { navbar.classList.add('bg-black/80', 'py-4'); } 
+            else { navbar.classList.remove('bg-black/80', 'py-4'); }
+            lastScrollY = window.scrollY;
+        });
+
+        const phrases = [
+            "Querida mujer: La Biblia y Nosotras nació en uno de mis propios procesos.",
+            "No nació en un escenario, nació en mi casa, con mi Biblia abierta, mis marcadores, mis preguntas y mis lágrimas.",
+            "Descubrí que la Palabra de Dios no era un libro lejano, era Dios hablándome a mí.",
+            "Es una invitación a que no leas por obligación, sino por encuentro; a que vuelvas a la Biblia como hija.",
+            "Aquí no necesitas ser perfecta, necesitas estar dispuesta.",
+            "Porque cuando una mujer entiende la Palabra: Sana su identidad, se afirma en su fe e impacta su generación.",
+            "No es solo un evento, es un regreso al lugar donde Dios sigue hablando... y quiero caminarlo contigo."
+        ];
+
+        const textContainer = document.getElementById("typewriter-text");
+        const signatureContainer = document.getElementById("final-signature");
+        let phraseIndex = 0;
+        let charIndex = 0;
+        const typingSpeed = 50; 
+        const pauseTime = 3000; 
+
+        function typeEffect() {
+            if (phraseIndex < phrases.length) {
+                let currentPhrase = phrases[phraseIndex];
+                if (currentPhrase.includes("necesitas estar dispuesta")) {
+                    textContainer.className = "font-brooklyn font-black uppercase text-brand-yellow text-4xl md:text-6xl cursor";
+                } else {
+                    textContainer.className = "font-baskerville italic text-2xl md:text-4xl text-white/95 leading-relaxed min-h-[150px] cursor";
+                }
+
+                if (charIndex < currentPhrase.length) {
+                    textContainer.innerHTML += currentPhrase.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeEffect, typingSpeed);
+                } else {
+                    setTimeout(() => {
+                        textContainer.style.opacity = "0";
+                        setTimeout(() => {
+                            textContainer.innerHTML = "";
+                            charIndex = 0;
+                            phraseIndex++;
+                            textContainer.style.opacity = "1";
+                            typeEffect();
+                        }, 800);
+                    }, pauseTime);
+                }
+            } else {
+                textContainer.classList.add('opacity-0');
+                textContainer.classList.remove('cursor');
+                setTimeout(() => {
+                    textContainer.style.display = 'none';
+                    signatureContainer.classList.remove('hidden');
+                    setTimeout(() => {
+                        signatureContainer.classList.add('opacity-100', 'translate-y-0');
+                    }, 100);
+                }, 1000);
+            }
+        }
+        window.onload = () => { setTimeout(typeEffect, 1000); };
+    </script>
+</body>
+</html>

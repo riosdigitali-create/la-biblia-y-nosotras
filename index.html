@@ -59,8 +59,8 @@
 
         .vignette-clean {
             position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(44,30,49,0.5) 0%, transparent 20%, transparent 80%, rgba(44,30,49,0.7) 100%);
-            pointer-events: none; z-index: 1;
+            background: linear-gradient(to bottom, rgba(44,30,49,0.3) 0%, transparent 30%, transparent 70%, rgba(44,30,49,0.8) 100%);
+            pointer-events: none; z-index: 10;
         }
 
         .nav-hidden { transform: translateY(-100%); opacity: 0; }
@@ -83,20 +83,55 @@
         .ig-post-premium:hover { transform: translateY(-5px) scale(1.01); z-index: 10; border-color: rgba(232, 122, 123, 0.4); }
         .ig-post-premium img, .ig-post-premium video { transition: transform 1.2s ease; width: 100%; height: 100%; object-fit: cover; }
         
-        .glass-ticket {
-            background: rgba(44, 30, 49, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 248, 231, 0.05); transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        .credential-physical {
+            background-color: #fcfbfa;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E"), 
+                              linear-gradient(135deg, #ffffff 0%, #f4f0e6 100%);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 
+                inset 0 0 0 1px rgba(255,255,255,0.5),
+                0 30px 60px rgba(0,0,0,0.6),
+                0 0 80px rgba(232,122,123,0.15);
+            color: #2C1E31;
         }
-        .glass-ticket:hover { transform: translateY(-8px); background: rgba(44, 30, 49, 0.8); border-color: rgba(255, 248, 231, 0.15); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+
+        .credential-hole {
+            background-color: #1a121d;
+            box-shadow: 
+                inset 0 3px 6px rgba(0,0,0,0.6),
+                0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .badge-container {
+            transform-origin: top center;
+            will-change: transform, opacity;
+        }
+
+        [data-aos="badge-drop-swing"] {
+            opacity: 0;
+            transform: translateY(-150px) rotate(-15deg) scale(0.9);
+            transition-property: transform, opacity;
+        }
+
+        [data-aos="badge-drop-swing"].aos-animate {
+            animation: badgeDropSwing 1.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            opacity: 1;
+        }
+
+        @keyframes badgeDropSwing {
+            0% { opacity: 0; transform: translateY(-150px) rotate(-15deg) scale(0.9); }
+            40% { opacity: 1; transform: translateY(10px) rotate(10deg) scale(1.01); }
+            55% { transform: translateY(0) rotate(-6deg); }
+            70% { transform: translateY(0) rotate(3deg); }
+            85% { transform: translateY(0) rotate(-1deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+        }
 
         .btn-premium { background: #E87A7B; color: #FFF8E7; transition: all 0.4s ease; }
-        .btn-premium:hover { background: #FFF8E7; color: #2C1E31; transform: translateY(-1px); box-shadow: 0 5px 15px rgba(232, 122, 123, 0.3); }
+        .btn-premium:hover { background: #2C1E31; color: #FFF8E7; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(44, 30, 49, 0.3); }
         
         .btn-ig { background: transparent; color: #FFF8E7; border: 1px solid rgba(255,248,231,0.3); transition: all 0.4s ease; }
         .btn-ig:hover { background: #FFF8E7; color: #2C1E31; transform: translateY(-1px); }
-
-        .btn-outline-ticket { background: transparent; color: #FFF8E7; border: 1px solid rgba(255,248,231,0.2); transition: all 0.3s ease; }
-        .btn-outline-ticket:hover { background: #FFF8E7; color: #2C1E31; }
 
         .glass-form {
             background: rgba(44, 30, 49, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
@@ -134,8 +169,14 @@
     </nav>
 
     <header id="inicio" class="bg-hero relative flex items-center justify-center px-4 min-h-screen w-full overflow-hidden">
-        <div class="vignette-clean z-10"></div>
-        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-brand-dark to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-brand-dark/50 z-10"></div>
+        <div class="vignette-clean z-20"></div>
+        
+        <div class="relative z-30 text-center" data-aos="fade-up" data-aos-duration="1500">
+            <img src="logo.png" alt="La Biblia y Nosotras Logo" class="max-w-[240px] md:max-w-xs h-auto mx-auto drop-shadow-2xl">
+        </div>
+
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-brand-dark to-transparent z-20"></div>
     </header>
 
     <section id="historia" class="relative bg-brand-dark overflow-hidden flex flex-col items-center justify-center min-h-screen w-full px-4">
@@ -152,143 +193,117 @@
         </div>
     </section>
 
-    <section id="niveles" class="relative py-24 px-4 w-full z-20 bg-brand-dark overflow-hidden">
+    <section id="niveles" class="relative py-32 px-4 w-full z-20 bg-brand-dark overflow-hidden">
         <div class="absolute inset-0 z-0" style="clip-path: inset(0 0 0 0);">
             <img src="01.jpg" class="fixed top-0 left-0 w-screen h-screen object-cover opacity-100 pointer-events-none" alt="Fondo Experiencias">
-            <div class="absolute inset-0 bg-brand-dark/60 z-10"></div>
+            <div class="absolute inset-0 bg-brand-dark/55 z-10"></div>
             <div class="vignette-clean z-10"></div>
         </div>
         
         <div class="max-w-5xl mx-auto relative z-10">
             <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="font-titulos text-3xl md:text-5xl tracking-tighter mb-4">
-                    <span class="text-brand-lightpink">Niveles</span> <span class="text-brand-cream">de experiencia</span>
+                <h2 class="font-titulos text-3xl md:text-5xl lg:text-6xl tracking-tighter mb-5">
+                    <span class="text-brand-lightpink drop-shadow-md">Tu lugar en</span> <span class="text-brand-cream drop-shadow-md">el encuentro</span>
                 </h2>
-                <p class="font-menores text-brand-cream text-lg md:text-xl max-w-2xl mx-auto font-bold uppercase tracking-widest leading-relaxed">“No es solo un asiento. Es el lugar desde donde decides <span class="text-brand-lightpink">vivir este encuentro.</span>”</p>
+                <div class="w-20 h-px bg-gradient-to-r from-transparent via-brand-coral/50 to-transparent mx-auto mb-5"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="relative max-w-3xl mx-auto mb-20 group badge-container" data-aos="badge-drop-swing" data-aos-delay="150">
                 
-                <div class="glass-ticket rounded-2xl overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="100">
-                    <div class="h-1.5 w-full bg-brand-cream/60"></div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-cream mb-4">🌸 Amiga</h3>
-                        <div class="font-menores text-brand-cream/85 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>Este es el comienzo. El <span class="text-brand-lightpink font-bold">primer sí</span> que muchas veces cambia todo.</p>
-                            <p>El nivel Amiga es perfecto para las mujeres que quieren ser parte de este encuentro y vivir la experiencia completa desde la Arena.</p>
-                            <p>Tendrás acceso a toda la jornada del evento, momentos de adoración, enseñanzas y una atmósfera creada especialmente para mujeres que desean crecer en su fe y en su vida.</p>
-                            <p>A veces todo empieza con una invitación… y esta puede ser la tuya.</p>
-                        </div>
-                        <div class="border-t border-brand-cream/20 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-cream/70 mb-4 uppercase">Beneficios:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start text-[10px] text-brand-cream tracking-wide font-menores uppercase"><span class="text-brand-pastelpink mr-2">✦</span> Entrada al evento y acceso a toda la experiencia del encuentro.</li>
-                            </ul>
-                        </div>
-                        <button onclick="selectLevel('Amiga')" class="btn-outline-ticket w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase">Elegir experiencia</button>
-                    </div>
-                </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] bg-brand-coral/15 blur-[100px] rounded-full pointer-events-none z-0 transition-opacity duration-700 group-hover:opacity-70"></div>
+                
+                <div class="credential-physical rounded-[2rem] p-6 md:p-10 text-center relative z-20 transition-transform duration-500 hover:scale-[1.01]">
+                    
+                    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-14 h-2 rounded-full credential-hole z-30"></div>
 
-                <div class="glass-ticket rounded-2xl overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="200">
-                    <div class="h-1.5 w-full bg-brand-lightpink"></div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-lightpink mb-4">💞 Hermana</h3>
-                        <div class="font-menores text-brand-cream/85 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>Cuando una mujer llega como Hermana, ya no solo asiste… <span class="text-brand-lightpink font-bold">pertenece.</span></p>
-                            <p>Este nivel te coloca en una zona preferente dentro del recinto, donde podrás vivir el evento con mayor cercanía al escenario y sentir aún más de cerca cada momento.</p>
-                            <p>Porque cuando miles de mujeres se reúnen con un mismo propósito, <span class="text-brand-cream font-bold">algo poderoso sucede.</span></p>
-                            <p>Aquí ya no eres solo espectadora. Eres parte de una comunidad.</p>
-                        </div>
-                        <div class="border-t border-brand-cream/20 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-cream/70 mb-4 uppercase">Beneficios:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start text-[10px] text-brand-cream tracking-wide font-menores uppercase"><span class="text-brand-lightpink mr-2">✦</span> Mejor ubicación dentro del recinto y experiencia más cercana al escenario.</li>
-                            </ul>
-                        </div>
-                        <button onclick="selectLevel('Hermana')" class="btn-outline-ticket w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase">Elegir experiencia</button>
+                    <div class="inline-block bg-brand-plum text-brand-cream font-menores text-[8px] md:text-[9px] tracking-[0.3em] py-2 px-5 rounded-full uppercase mt-7 mb-7 shadow-md">
+                        Fase 1 · Cupo Estrictamente Limitado
                     </div>
-                </div>
 
-                <div class="glass-ticket rounded-2xl overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="300">
-                    <div class="h-1.5 w-full bg-brand-coral"></div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-coral mb-4">💖 Bestie</h3>
-                        <div class="font-menores text-brand-cream/85 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>Hay experiencias que se viven mejor <span class="text-brand-coral font-bold">cuando estás más cerca.</span></p>
-                            <p>El nivel Bestie está diseñado para quienes desean una experiencia más especial dentro del evento.</p>
-                            <p>Tendrás una ubicación preferente que te permitirá disfrutar cada detalle del escenario, cada palabra y cada momento de manera más cercana.</p>
-                            <p>Es el lugar perfecto para las que saben que este encuentro no será un evento más… será un recuerdo que llevarán toda la vida.</p>
-                        </div>
-                        <div class="border-t border-brand-cream/20 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-cream/70 mb-4 uppercase">Beneficios:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start text-[10px] text-brand-cream tracking-wide font-menores uppercase"><span class="text-brand-coral mr-2">✦</span> Zona preferente + acceso anticipado al recinto.</li>
-                            </ul>
-                        </div>
-                        <button onclick="selectLevel('Bestie')" class="btn-outline-ticket w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase">Elegir experiencia</button>
-                    </div>
-                </div>
+                    <h3 class="font-titulos text-4xl md:text-5xl lg:text-6xl tracking-tighter mb-2 text-brand-plum drop-shadow-sm uppercase">
+                        Embajadora
+                    </h3>
+                    <p class="font-menores text-[9px] md:text-[10px] text-brand-plum/50 uppercase tracking-[0.45em] mb-8 border-b border-brand-plum/10 pb-4 w-max mx-auto px-4 font-bold">
+                        La Biblia y Nosotras · Arena CDMX
+                    </p>
 
-                <div class="glass-ticket rounded-2xl overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="400">
-                    <div class="h-1.5 w-full bg-brand-deepcoral"></div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-deepcoral mb-4">🤍 Círculo</h3>
-                        <div class="font-menores text-brand-cream/85 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>El nivel Círculo es para las mujeres que quieren <span class="text-brand-deepcoral font-bold">estar dentro.</span> Dentro de la atmósfera. Dentro del momento. Dentro de la experiencia.</p>
-                            <p>Tu ubicación estará en una zona privilegiada cercana al escenario, donde cada momento se vive con mayor intensidad.</p>
-                            <p>Aquí la experiencia se vuelve más personal, más profunda y más memorable.</p>
-                        </div>
-                        <div class="border-t border-brand-cream/20 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-cream/70 mb-4 uppercase">Beneficios:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start text-[10px] text-brand-cream tracking-wide font-menores uppercase"><span class="text-brand-deepcoral mr-2">✦</span> Ubicación privilegiada cerca del escenario.</li>
-                            </ul>
-                        </div>
-                        <button onclick="selectLevel('Circulo')" class="btn-outline-ticket w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase">Elegir experiencia</button>
+                    <div class="max-w-xl mx-auto space-y-5 mb-10 px-2">
+                        <p class="font-titulos text-xl md:text-2xl text-brand-plum leading-tight">
+                            Este boleto no es solo un acceso.<br>
+                            <span class="text-brand-coral italic">Es una asignación.</span>
+                        </p>
+                        <p class="font-menores text-[10px] md:text-[11px] text-brand-plum/80 uppercase tracking-[0.2em] leading-relaxed mt-4">
+                            Las Embajadoras deciden levantar su voz para invitar, reunir y despertar a otras mujeres alrededor de la Palabra.<br><br>
+                            Creemos que los movimientos más poderosos comenzaron con personas que dijeron:<br>
+                            <span class="text-brand-plum font-titulos italic text-lg md:text-xl mt-3 block normal-case">“Yo iré y lo anunciaré.”</span>
+                        </p>
                     </div>
-                </div>
 
-                <div class="glass-ticket rounded-2xl overflow-hidden flex flex-col relative" data-aos="fade-up" data-aos-delay="500">
-                    <div class="h-1.5 w-full bg-brand-pastelpink"></div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-pastelpink mb-4">🔥 Íntima</h3>
-                        <div class="font-menores text-brand-cream/85 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>Hay lugares donde <span class="text-brand-pastelpink font-bold">todo se siente diferente.</span></p>
-                            <p>El nivel Íntima te coloca muy cerca del escenario, donde cada palabra, cada canción y cada momento se viven con una cercanía única.</p>
-                            <p>Además, recibirás un kit especial del evento, creado para acompañarte en esta experiencia.</p>
-                            <p>Este nivel es para las mujeres que desean vivir el encuentro desde un lugar más cercano, más personal y más significativo.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto text-left mb-10 relative">
+                        <div class="bg-white/60 p-5 md:p-6 rounded-2xl border border-brand-plum/5 hover:border-brand-coral/30 hover:shadow-lg transition-all duration-300 group/card">
+                            <div class="text-brand-coral text-xl mb-3 group-hover/card:scale-110 transition-transform">✧</div>
+                            <strong class="font-menores text-brand-plum text-[11px] block mb-2 uppercase tracking-widest">2 Encuentros Previos</strong>
+                            <p class="font-menores text-brand-plum/70 text-[9px] uppercase tracking-widest leading-relaxed font-bold">Momentos exclusivos con otras embajadoras para preparar el corazón y recibir visión.</p>
                         </div>
-                        <div class="border-t border-brand-cream/20 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-cream/70 mb-4 uppercase">Beneficios:</p>
-                            <ul class="space-y-2">
-                                <li class="flex items-start text-[10px] text-brand-cream tracking-wide font-menores uppercase"><span class="text-brand-pastelpink mr-2">✦</span> Zona muy cercana al escenario + kit especial del evento.</li>
-                            </ul>
+                        <div class="bg-white/60 p-5 md:p-6 rounded-2xl border border-brand-plum/5 hover:border-brand-coral/30 hover:shadow-lg transition-all duration-300 group/card">
+                            <div class="text-brand-deepcoral text-xl mb-3 group-hover/card:scale-110 transition-transform">✧</div>
+                            <strong class="font-menores text-brand-plum text-[11px] block mb-2 uppercase tracking-widest">Zona Reservada</strong>
+                            <p class="font-menores text-brand-plum/70 text-[9px] uppercase tracking-widest leading-relaxed font-bold">Un lugar especial en la Arena junto a las mujeres que levantan este movimiento.</p>
                         </div>
-                        <button onclick="selectLevel('Intima')" class="btn-outline-ticket w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase">Elegir experiencia</button>
+                        <div class="bg-white/60 p-5 md:p-6 rounded-2xl border border-brand-plum/5 hover:border-brand-coral/30 hover:shadow-lg transition-all duration-300 group/card">
+                            <div class="text-brand-plum text-xl mb-3 group-hover/card:scale-110 transition-transform">✧</div>
+                            <strong class="font-menores text-brand-plum text-[11px] block mb-2 uppercase tracking-widest">Acceso Preferencial</strong>
+                            <p class="font-menores text-brand-plum/70 text-[9px] uppercase tracking-widest leading-relaxed font-bold">Entrada prioritaria el día del encuentro para una experiencia fluida y sin contratiempos.</p>
+                        </div>
+                        <div class="bg-white/60 p-5 md:p-6 rounded-2xl border border-brand-plum/5 hover:border-brand-coral/30 hover:shadow-lg transition-all duration-300 group/card">
+                            <div class="text-brand-coral text-xl mb-3 group-hover/card:scale-110 transition-transform">✧</div>
+                            <strong class="font-menores text-brand-plum text-[11px] block mb-2 uppercase tracking-widest">Regalo Exclusivo</strong>
+                            <p class="font-menores text-brand-plum/70 text-[9px] uppercase tracking-widest leading-relaxed font-bold">Un detalle físico diseñado específicamente para recordar este momento histórico.</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="glass-ticket vip-ticket rounded-2xl overflow-hidden flex flex-col relative transform lg:scale-[1.05] z-10" data-aos="fade-up" data-aos-delay="600">
-                    <div class="h-2 w-full bg-brand-coral"></div>
-                    <div class="absolute top-4 right-4 bg-brand-cream text-brand-plum font-menores text-[10px] tracking-widest py-1 px-3 rounded-full uppercase shadow-lg">Premium</div>
-                    <div class="p-8 flex-grow flex flex-col">
-                        <h3 class="font-titulos text-2xl tracking-widest text-brand-pastelpink mb-4">👑 VIP Girls</h3>
-                        <div class="font-menores text-brand-cream/95 text-[11px] leading-relaxed mb-8 flex-grow space-y-3 drop-shadow-sm uppercase tracking-wider">
-                            <p>El nivel VIP Girls es la experiencia <span class="text-brand-coral font-bold">más exclusiva</span> del evento. Está diseñado para las mujeres que quieren vivir este encuentro desde el lugar más cercano posible.</p>
-                        </div>
-                        <div class="border-t border-brand-pastelpink/30 pt-6 mb-6">
-                            <p class="font-menores text-[10px] tracking-[0.1em] text-brand-pastelpink mb-4 uppercase">Incluye:</p>
-                            <ul class="space-y-1 text-[10px] text-brand-cream tracking-wide font-menores uppercase">
-                                <li class="flex items-start"><span class="text-brand-coral mr-2">✨</span> primeras filas</li>
-                                <li class="flex items-start"><span class="text-brand-coral mr-2">✨</span> acceso anticipado exclusivo</li>
-                                <li class="flex items-start"><span class="text-brand-coral mr-2">✨</span> kit VIP del evento</li>
-                                <li class="flex items-start"><span class="text-brand-coral mr-2">✨</span> zona reservada</li>
-                                <li class="flex items-start"><span class="text-brand-coral mr-2">✨</span> experiencia premium</li>
-                            </ul>
-                            <p class="font-menores text-[10px] text-brand-cream/90 mt-4 uppercase tracking-wider">Aquí no solo vienes a asistir… vienes a vivir la experiencia completa.</p>
-                        </div>
-                        <button onclick="selectLevel('VIP Girls')" class="btn-premium w-full py-4 rounded-sm font-menores text-[10px] tracking-[0.15em] uppercase shadow-md">Elegir VIP Girls</button>
+                    <div class="max-w-md mx-auto mb-10 bg-brand-lightpink/10 rounded-2xl py-6 px-5 border border-brand-plum/5">
+                        <p class="font-menores text-[9px] tracking-[0.35em] text-brand-coral mb-3 uppercase font-bold">Tu misión como Embajadora</p>
+                        <p class="font-menores text-brand-plum/90 text-[10px] md:text-[11px] uppercase tracking-[0.15em] leading-relaxed font-bold">
+                            Invitar al menos a 20 mujeres.<br>Porque cuando una mujer levanta la voz, muchas más encuentran el camino de regreso.
+                        </p>
                     </div>
+
+                    <button onclick="selectLevel('Embajadora')" class="btn-premium relative overflow-hidden inline-block w-full md:w-auto px-10 py-4 rounded-full font-menores text-[11px] tracking-[0.25em] uppercase shadow-lg transform transition-all group/btn">
+                        <span class="relative z-10 font-bold">Aceptar el Llamado</span>
+                        <div class="absolute inset-0 bg-brand-plum translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300 ease-out z-0"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mb-10" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                <div class="inline-flex items-center justify-center w-full max-w-lg mx-auto">
+                    <div class="h-px bg-brand-cream/20 flex-grow"></div>
+                    <p class="font-menores text-brand-cream/60 text-[9px] md:text-[10px] uppercase tracking-[0.35em] px-5 flex-shrink-0 drop-shadow-md">Otras localidades (Próximamente)</p>
+                    <div class="h-px bg-brand-cream/20 flex-grow"></div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 opacity-30 grayscale pointer-events-none select-none max-w-4xl mx-auto mb-10" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                <div class="bg-brand-dark/40 border border-brand-cream/20 rounded-2xl p-5 text-center flex flex-col justify-center items-center h-28 backdrop-blur-sm shadow-lg">
+                    <h3 class="font-titulos text-base text-brand-cream mb-2">Amiga</h3>
+                    <div class="h-0.5 w-6 bg-brand-cream mb-2"></div>
+                </div>
+                <div class="bg-brand-dark/40 border border-brand-cream/20 rounded-2xl p-5 text-center flex flex-col justify-center items-center h-28 backdrop-blur-sm shadow-lg">
+                    <h3 class="font-titulos text-base text-brand-cream mb-2">Hermana</h3>
+                    <div class="h-0.5 w-6 bg-brand-lightpink mb-2"></div>
+                </div>
+                <div class="bg-brand-dark/40 border border-brand-cream/20 rounded-2xl p-5 text-center flex flex-col justify-center items-center h-28 backdrop-blur-sm shadow-lg">
+                    <h3 class="font-titulos text-base text-brand-cream mb-2">Bestie</h3>
+                    <div class="h-0.5 w-6 bg-brand-coral mb-2"></div>
+                </div>
+                <div class="bg-brand-dark/40 border border-brand-cream/20 rounded-2xl p-5 text-center flex flex-col justify-center items-center h-28 backdrop-blur-sm shadow-lg">
+                    <h3 class="font-titulos text-base text-brand-cream mb-2">Círculo</h3>
+                    <div class="h-0.5 w-6 bg-brand-deepcoral mb-2"></div>
+                </div>
+                <div class="bg-brand-dark/40 border border-brand-cream/20 rounded-2xl p-5 text-center flex flex-col justify-center items-center h-28 backdrop-blur-sm shadow-lg">
+                    <h3 class="font-titulos text-base text-brand-cream mb-2">Íntima</h3>
+                    <div class="h-0.5 w-6 bg-brand-pastelpink mb-2"></div>
                 </div>
             </div>
         </div>
@@ -330,7 +345,7 @@
         <div class="vignette-clean z-10"></div>
         <div class="absolute inset-0 bg-brand-dark/40 z-10"></div> 
         <div class="relative z-20 max-w-4xl mx-auto text-center" data-aos="zoom-in">
-            <h2 class="font-titulos text-brand-cream text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-6">Arena <br><span class="text-brand-coral">CdMx</span></h2>
+            <h2 class="font-titulos text-brand-cream text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-6">ARENA <br><span class="text-brand-coral">CDMX</span></h2>
             <p class="font-menores text-base md:text-xl text-brand-pastelpink uppercase tracking-widest">15 de marzo.</p>
         </div>
     </section>
@@ -346,7 +361,7 @@
             <h2 class="font-titulos text-brand-cream text-2xl md:text-4xl tracking-tighter mb-8 leading-tight drop-shadow-lg text-center w-full">Una mujer en la Palabra <br><span class="text-brand-coral">Levanta generaciones.</span></h2>
             
             <form id="leadForm" class="glass-form rounded-xl p-6 md:p-10 text-left relative">
-                <p class="font-titulos text-brand-pastelpink tracking-[0.15em] text-[12px] mb-8 text-center uppercase">Sé de las primeras en adquirir tu boleto</p>
+                <p class="font-titulos text-brand-pastelpink tracking-[0.15em] text-[12px] mb-8 text-center uppercase">Aplica para ser Embajadora</p>
                 <div class="space-y-6">
                     <input type="text" placeholder="Nombre completo" required class="font-menores input-premium w-full py-2.5 text-[11px] placeholder-brand-cream/50 uppercase tracking-widest">
                     <input type="email" placeholder="Correo electrónico" required class="font-menores input-premium w-full py-2.5 text-[11px] placeholder-brand-cream/50 uppercase tracking-widest">
@@ -354,16 +369,15 @@
                         <input type="tel" placeholder="WhatsApp" required class="font-menores input-premium w-full py-2.5 text-[11px] placeholder-brand-cream/50 uppercase tracking-widest">
                         <select name="nivel_experiencia" id="nivel_experiencia" required class="font-menores input-premium w-full py-2.5 text-[11px] uppercase tracking-widest">
                             <option value="" disabled selected>Experiencia</option>
-                            <option value="Amiga">🌸 Amiga</option>
-                            <option value="Hermana">💞 Hermana</option>
-                            <option value="Bestie">💖 Bestie</option>
-                            <option value="Circulo">🤍 Círculo</option>
-                            <option value="Intima">🔥 Íntima</option>
-                            <option value="VIP Girls">👑 VIP Girls</option>
+                            <option value="Embajadora">👑 Embajadora (Fase 1)</option>
+                            <option value="Amiga" disabled>🌸 Amiga (Próximamente)</option>
+                            <option value="Hermana" disabled>💞 Hermana (Próximamente)</option>
+                            <option value="Bestie" disabled>💖 Bestie (Próximamente)</option>
+                            <option value="Circulo" disabled>🤍 Círculo (Próximamente)</option>
+                            <option value="Intima" disabled>🔥 Íntima (Próximamente)</option>
                         </select>
                     </div>
-                    <input type="number" min="1" placeholder="Cantidad de boletos" required class="font-menores input-premium w-full py-2.5 text-[11px] placeholder-brand-cream/50 uppercase tracking-widest">
-                    <button type="submit" id="submitBtn" class="font-menores btn-premium w-full py-4 tracking-[0.15em] text-[11px] rounded mt-8 shadow-lg uppercase">Registrarme</button>
+                    <button type="submit" id="submitBtn" class="font-menores btn-premium w-full py-4 tracking-[0.15em] text-[11px] rounded mt-8 shadow-lg uppercase">Enviar Solicitud</button>
                 </div>
             </form>
         </div>
@@ -376,7 +390,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        AOS.init({ once: true, duration: 1000 });
+        AOS.init({ 
+            once: true,
+            duration: 1200,
+            easing: 'ease-out-cubic'
+        });
 
         const navbar = document.getElementById('navbar');
         let lastScrollY = window.scrollY;

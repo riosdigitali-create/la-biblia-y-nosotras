@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Biblia y Nosotras — Arena CDMX — 15 Ago 2026</title>
+
+    <!-- WhatsApp automático vía CRM -->
+    <link rel="preconnect" href="https://www.instagram.com">
+
+    <link rel="preload" href="LaBibliayNosotras-03.webp" as="image">
+    <link rel="preload" href="logo.webp" as="image">
+    <link rel="preload" href="AloeveraDisplay-Medium%20(1).otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="LibreBaskerville-Bold%20(1).ttf" as="font" type="font/truetype" crossorigin>
+
+    <style>
+        /* ═══════════════════════════════════════════
+           FUENTES
+        ═══════════════════════════════════════════ */
+        @font-face{font-family:'Libre';src:url('LibreBaskerville-Bold%20(1).ttf') format('truetype');font-weight:700;font-display:swap}
+        @font-face{font-family:'Aloe';src:url('AloeveraDisplay-Medium%20(1).otf') format('opentype');font-weight:500;font-display:swap}
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+        /* ═══════════════════════════════════════════
+           PALETA DE COLORES
+        ═══════════════════════════════════════════ */
+        :root{
+            --black:#151714;
+            --cream:#F4F3EA;
+            --pink:#FF88B0;
+            --red:#FF0C00;
+            --blue-light:#00C5FF;
+            --blue-dark:#0011E4;
+            --yellow:#FFD609;
+            --orange:#FF6700;
+            --green-light:#C1FF1A;
+            --green-dark:#1F5144;
+            --card:#FFFFFF;
+            --faint:rgba(21,23,20,0.06);
+            --mid:rgba(21,23,20,0.12);
+            --subtle:rgba(21,23,20,0.4);
+            --muted:rgba(21,23,20,0.6);
+        }
+
+        html{scroll-behavior:smooth}
+        body{background:var(--cream);color:var(--black);font-family:'Aloe',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        ::selection{background:var(--red);color:var(--cream)}
+        a{color:inherit;text-decoration:none}
+
+        /* ═══════════════════════════════════════════
+           TICKER — SIEMPRE ARRIBA DEL TODO
+        ═══════════════════════════════════════════ */
+        .ticker{
+            background:var(--red);padding:0.55rem 0;overflow:hidden;
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+        }
+        .ticker-track{display:flex;gap:3rem;animation:tickerScroll 18s linear infinite;white-space:nowrap;will-change:transform}
+        .ticker-track span{font-family:'Libre';font-size:0.95rem;letter-spacing:0.05em;color:var(--cream);flex-shrink:0}
+        .ticker-track .dot{opacity:0.6;color:var(--yellow)}
+        @keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* ═══════════════════════════════════════════
+           NAV
+        ═══════════════════════════════════════════ */
+        nav{
+            position:fixed;top:32px;left:0;right:0;z-index:500;
+            padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;
+            transition:background 0.4s,padding 0.4s,top 0.4s;
+        }
+        nav.scrolled{top:32px;background:rgba(244,243,234,0.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:0.8rem 2rem;box-shadow:0 1px 0 rgba(21,23,20,0.05)}
+        .nav-logo{height:25px;opacity:0.9;transition:opacity 0.3s}
+        .nav-logo:hover{opacity:1}
+        .nav-r{display:flex;gap:0.6rem;align-items:center}
+        .nav-btn{
+            font-family:'Aloe';font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;
+            text-decoration:none;color:var(--black);padding:0.6rem 1.4rem;
+            border:1px solid rgba(21,23,20,0.15);transition:all 0.3s;cursor:pointer;
+            background:transparent;display:inline-flex;align-items:center;gap:0.4rem;
+        }
+        .nav-btn:hover{background:var(--pink);border-color:var(--pink);color:var(--black)}
+        .nav-btn.accent{background:var(--red);color:var(--cream);border-color:var(--red)}
+        .nav-btn.accent:hover{background:var(--black);border-color:var(--black)}
+        .nav-btn.fill{background:var(--pink);border-color:var(--pink);font-weight:bold}
+        .nav-btn.fill:hover{background:var(--red);border-color:var(--red);color:var(--cream)}
+
+        /* ═══════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════ */
+        #hero{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;padding-top:32px}
+
+        .hero-left{position:relative;overflow:hidden;width:100%;height:72vh;min-height:460px;background:var(--black);}
+        .hero-left video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}
+        .hero-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:opacity .6s ease}
+        .hero-poster.hidden{opacity:0;pointer-events:none}
+
+        .hero-right{
+            display:flex;flex-direction:column;align-items:center;
+            padding:4.5rem 2rem 4rem;background:var(--cream);position:relative;width:100%;
+        }
+
+        .logo-big{
+            width:clamp(200px,28vw,350px);margin-bottom:3rem;
+            opacity:0;animation:slideUp 1s 1.6s cubic-bezier(0.16,1,0.3,1) forwards;
+            filter:brightness(0) opacity(0.85);
+        }
+
+        .hero-tag{
+            font-family:'Aloe';font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;
+            color:var(--red);margin-bottom:3rem;opacity:0;
+            animation:slideUp 0.8s 1.8s cubic-bezier(0.16,1,0.3,1) forwards;font-weight:bold;
+        }
+
+        .hero-counter{
+            display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(1.5rem,5vw,4rem);
+            margin-bottom:3rem;opacity:0;animation:slideUp 0.8s 2s cubic-bezier(0.16,1,0.3,1) forwards
+        }
+        .counter-block{text-align:center}
+        .counter-num{font-family:'Libre';font-size:clamp(2.8rem,5vw,4.5rem);line-height:1;letter-spacing:-0.04em;color:var(--red)}
+        .counter-label{font-family:'Aloe';font-size:0.55rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(21,23,20,0.5);margin-top:0.4rem}
+
+        .cta-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;opacity:0;animation:slideUp 0.8s 2.2s cubic-bezier(0.16,1,0.3,1) forwards;width:100%}
+        .hero-cta{font-family:'Aloe';font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;text-decoration:none;padding:1.1rem 2.8rem;transition:all 0.4s;display:inline-block}
+        .hero-cta.primary{background:var(--pink);color:var(--black);border:1px solid var(--pink)}
+        .hero-cta.primary:hover{background:var(--red);border-color:var(--red);color:var(--cream)}
+        .hero-cta.secondary{background:transparent;color:var(--black);border:1px solid rgba(21,23,20,0.15)}
+        .hero-cta.secondary:hover{border-color:var(--black);background:var(--black);color:var(--cream)}
+
+        @keyframes slideUp{0%{opacity:0;transform:translateY(35px)}100%{opacity:1;transform:translateY(0)}}
+
+        /* ═══════════════════════════════════════════
+           EMBAJADORA
+        ═══════════════════════════════════════════ */
+        #embajadora{display:grid;grid-template-columns:5fr 7fr;min-height:100vh;background:var(--cream);color:var(--black)}
+        @media(max-width:900px){#embajadora{grid-template-columns:1fr}}
+        .emb-img-side{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:4rem 2rem;background:rgba(255,136,176,0.1)}
+        .cred-scene{perspective:1200px;position:relative;z-index:10}
+        .cred-card{width:280px;background:linear-gradient(160deg,var(--pink) 0%,var(--red) 100%);border-radius:18px;padding:0;position:relative;overflow:hidden;box-shadow:0 30px 60px rgba(255,12,0,0.2),0 0 0 1px rgba(255,255,255,0.2) inset,0 2px 0 rgba(255,255,255,0.3) inset;transition:transform 0.7s cubic-bezier(0.16,1,0.3,1);transform:rotateY(-6deg) rotateX(3deg) rotate(-3deg);transform-style:preserve-3d}
+        .cred-scene:hover .cred-card{transform:rotateY(0) rotateX(0) rotate(0) scale(1.04)}
+        .cred-card::before{content:'';position:absolute;inset:0;z-index:1;background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");border-radius:18px;pointer-events:none}
+        .cred-inner{position:relative;z-index:3;padding:2.2rem 1.8rem 1.8rem}
+        .cred-hole{width:35px;height:12px;background:rgba(21,23,20,0.15);border-radius:6px;margin:0 auto 1.4rem;border:1px solid rgba(255,255,255,0.2);box-shadow:inset 0 2px 4px rgba(0,0,0,0.2)}
+        .cred-logo-row{display:flex;align-items:center;gap:0.5rem;margin-bottom:1.8rem;justify-content:center}
+        .cred-photo{width:110px;height:110px;margin:0 auto 1.4rem;background:rgba(255,255,255,0.9);border-radius:12px;border:3px solid rgba(255,255,255,0.5);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 8px 20px rgba(0,0,0,0.15)}
+        .cred-photo-placeholder{font-family:'Aloe';font-size:0.5rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--pink);text-align:center}
+        .cred-name{font-family:'Libre';font-size:1.8rem;color:var(--cream);text-align:center;letter-spacing:0.02em;margin-bottom:0.3rem;text-shadow:0 2px 5px rgba(0,0,0,0.1)}
+        .cred-role{font-family:'Aloe';font-size:0.55rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(244,243,234,0.9);text-align:center;margin-bottom:1.8rem}
+        .cred-bottom{display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid rgba(255,255,255,0.3);padding-top:1.2rem}
+        .cred-venue{font-family:'Aloe';font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream);line-height:1.4;font-weight:700}
+        .cred-qr{width:40px;height:40px;background:var(--cream);border-radius:4px;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);gap:1px;padding:3px}
+        .cred-qr i{background:var(--red);border-radius:1px}
+        .cred-qr i:nth-child(2),.cred-qr i:nth-child(4),.cred-qr i:nth-child(6),.cred-qr i:nth-child(8),.cred-qr i:nth-child(10),.cred-qr i:nth-child(13),.cred-qr i:nth-child(16),.cred-qr i:nth-child(18),.cred-qr i:nth-child(20),.cred-qr i:nth-child(22),.cred-qr i:nth-child(24){background:transparent}
+        .spotlight{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(255,136,176,0.5) 0%,rgba(255,136,176,0.1) 40%,transparent 70%);border-radius:50%;filter:blur(45px);top:50%;left:50%;transform:translate(-50%,-50%);animation:spotPulse 3s ease-in-out infinite;z-index:2}
+        @keyframes spotPulse{0%,100%{opacity:0.5;scale:0.9}50%{opacity:1;scale:1.15}}
+        .emb-content{display:flex;flex-direction:column;justify-content:center;padding:6rem 4rem 6rem 3rem}
+        @media(max-width:900px){.emb-content{padding:3rem 2rem}}
+        .emb-tag{font-family:'Aloe';font-size:0.55rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--red);margin-bottom:1.5rem;font-weight:bold;text-align:center;width:100%}
+        .emb-h{font-family:'Libre';font-size:clamp(2.2rem,4vw,3.6rem);letter-spacing:-0.03em;line-height:1.05;margin-bottom:3rem;color:var(--black);text-align:center;width:100%}
+        .emb-h span{color:var(--pink)}
+        .feat-list{display:flex;flex-direction:column;gap:2rem;margin-bottom:3.5rem}
+        .feat{display:grid;grid-template-columns:3.5rem 1fr;gap:1rem;align-items:start}
+        .feat-n{font-family:'Libre';font-size:2.2rem;line-height:1;color:var(--pink);opacity:0.8}
+        .feat h4{font-family:'Aloe';font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--black);margin-bottom:0.35rem;font-weight:bold}
+        .feat p{font-family:'Aloe';font-size:0.75rem;letter-spacing:0.06em;color:rgba(21,23,20,0.6);line-height:1.8}
+        .emb-mission{border-top:1px solid rgba(21,23,20,0.1);padding-top:2.5rem;margin-bottom:3rem;text-align:center;}
+        .emb-mission .quote{font-family:'Libre';font-style:italic;font-size:clamp(1.2rem,2.5vw,1.6rem);color:var(--red);line-height:1.4;margin-bottom:0.6rem;letter-spacing:-0.02em}
+        .emb-mission .detail{font-family:'Aloe';font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(21,23,20,0.5)}
+        .emb-cta{display:inline-block;padding:1.2rem 3.5rem;background:var(--pink);color:var(--black);font-family:'Aloe';font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;border:1px solid var(--pink);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);align-self:center}
+        .emb-cta:hover{background:var(--black);color:var(--cream);border-color:var(--black)}
+
+        /* ═══════════════════════════════════════════
+           REGISTRO — DARK, PREMIUM
+        ═══════════════════════════════════════════ */
+        #registro{
+            background:var(--black);
+            min-height:100vh;
+            display:flex;align-items:center;justify-content:center;
+            padding:8rem 2rem 6rem;
+            position:relative;overflow:hidden;
+        }
+        #registro .reg-glow{
+            position:absolute;width:600px;height:600px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(255,136,176,0.12) 0%, transparent 70%);
+            top:-100px;right:-100px;pointer-events:none;filter:blur(60px);
+        }
+        #registro .reg-glow2{
+            position:absolute;width:400px;height:400px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(0,197,255,0.07) 0%, transparent 70%);
+            bottom:-80px;left:-80px;pointer-events:none;filter:blur(50px);
+        }
+        
+        .paparazzi-fx {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .flash {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            box-shadow: 0 0 50px 50px rgba(255, 255, 255, 0);
+            border-radius: 50%;
+            opacity: 0;
+        }
+        .flash-1 { top: 25%; left: 15%; animation: flash-pop 3.5s infinite 0.2s; }
+        .flash-2 { top: 65%; right: 18%; animation: flash-pop 4.2s infinite 1.8s; }
+        .flash-3 { bottom: 15%; left: 35%; animation: flash-pop 5.7s infinite 2.5s; }
+        .flash-4 { top: 30%; right: 30%; animation: flash-pop 4.9s infinite 0.9s; }
+        .flash-5 { top: 80%; left: 12%; animation: flash-pop 6.2s infinite 3.7s; }
+
+        @keyframes flash-pop {
+            0%, 92%, 100% { opacity: 0; box-shadow: 0 0 50px 50px rgba(255, 255, 255, 0); }
+            93% { opacity: 1; box-shadow: 0 0 300px 200px rgba(255, 255, 255, 0.95); }
+            95% { opacity: 0; box-shadow: 0 0 50px 50px rgba(255, 255, 255, 0); }
+            96% { opacity: 0.8; box-shadow: 0 0 250px 150px rgba(255, 136, 176, 0.6); }
+            98% { opacity: 0; box-shadow: 0 0 50px 50px rgba(255, 255, 255, 0); }
+        }
+
+        .reg-container{max-width:580px;width:100%;position:relative;z-index:1}
+        .reg-header{margin-bottom:3.5rem;text-align:center}
+        .reg-eyetag{font-family:'Aloe';font-size:0.5rem;letter-spacing:0.55em;text-transform:uppercase;color:var(--pink);display:block;margin-bottom:1.4rem;font-weight:bold}
+        .reg-heading{font-family:'Libre';font-size:clamp(2.4rem,5vw,3.8rem);letter-spacing:-0.04em;line-height:1;color:var(--cream);margin-bottom:1.2rem}
+        .reg-heading span{color:var(--pink)}
+        .reg-sub{font-family:'Aloe';font-size:0.65rem;letter-spacing:0.08em;color:rgba(244,243,234,0.5);line-height:1.8;margin-bottom:0}
+
+        .reg-field{margin-bottom:1.6rem;position:relative}
+        .reg-field label{
+            font-family:'Aloe';font-size:0.5rem;letter-spacing:0.42em;text-transform:uppercase;
+            color:rgba(244,243,234,0.45);display:block;margin-bottom:0.65rem;font-weight:bold;
+            transition:color 0.3s;
+        }
+        .reg-form input,.reg-form select{
+            width:100%;
+            background:rgba(244,243,234,0.06);
+            border:1px solid rgba(244,243,234,0.12);
+            padding:1.2rem 1.4rem;
+            font-family:'Aloe';font-size:0.95rem;color:var(--cream);
+            outline:none;
+            transition:border-color 0.3s,background 0.3s,box-shadow 0.3s;
+            letter-spacing:0.04em;margin:0;
+            border-radius:4px;
+        }
+        .reg-form input::placeholder{color:rgba(244,243,234,0.2)}
+        .reg-form input:focus,.reg-form select:focus{
+            border-color:var(--pink);
+            background:rgba(255,136,176,0.08);
+            box-shadow:0 0 0 3px rgba(255,136,176,0.12);
+        }
+        .reg-field:focus-within label{color:var(--pink)}
+        .reg-form select{
+            -webkit-appearance:none;appearance:none;
+            background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF88B0' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");
+            background-repeat:no-repeat;background-position:right 1.2rem center;background-size:16px;
+            color:rgba(244,243,234,0.7);
+        }
+        .reg-form select option{background:var(--black);color:var(--cream)}
+        .reg-form select.hl{border-color:var(--pink);background:rgba(255,136,176,0.08)}
+        .reg-row{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+        @media(max-width:600px){.reg-row{grid-template-columns:1fr}}
+        
+        .reg-submit{
+            width:100%;padding:1.4rem;
+            background:var(--pink);color:var(--black);
+            border:none;font-family:'Aloe';font-size:0.75rem;letter-spacing:0.3em;
+            text-transform:uppercase;cursor:pointer;
+            transition:all 0.4s cubic-bezier(0.16,1,0.3,1);
+            margin-top:1.2rem;font-weight:bold;border-radius:4px;
+            position:relative;overflow:hidden;
+        }
+        .reg-submit::after{
+            content:'';position:absolute;inset:0;
+            background:linear-gradient(135deg,rgba(255,255,255,0.15),transparent);
+            opacity:0;transition:opacity 0.3s;
+        }
+        .reg-submit:hover{
+            background:var(--cream);color:var(--black);
+            transform:translateY(-2px);
+            box-shadow:0 16px 40px rgba(255,136,176,0.35);
+        }
+        .reg-submit:hover::after{opacity:1}
+        .reg-submit:active{transform:translateY(0)}
+        .reg-submit.loading{pointer-events:none;opacity:0.7}
+        .reg-submit.loading::before{
+            content:'';display:inline-block;width:16px;height:16px;
+            border:2px solid rgba(21,23,20,0.3);border-top-color:var(--black);
+            border-radius:50%;animation:spin 0.6s linear infinite;
+            vertical-align:middle;margin-right:0.6rem;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+
+        /* ═══ VALIDATION STYLES ═══ */
+        .reg-field .field-error{
+            font-family:'Aloe';font-size:0.5rem;letter-spacing:0.1em;
+            color:var(--red);margin-top:0.4rem;display:none;
+            animation:slideUp 0.3s ease;
+        }
+        .reg-field.has-error .field-error{display:block}
+        .reg-field.has-error input,
+        .reg-field.has-error select{
+            border-color:var(--red)!important;
+            background:rgba(255,12,0,0.08)!important;
+            box-shadow:0 0 0 3px rgba(255,12,0,0.1)!important;
+        }
+        .reg-field.valid input,
+        .reg-field.valid select{
+            border-color:rgba(0,200,100,0.5);
+            background:rgba(0,200,100,0.06);
+        }
+        
+        .reg-divider{
+            display:flex;align-items:center;gap:1rem;margin:1.8rem 0 1.2rem;
+        }
+        .reg-divider span{font-family:'Aloe';font-size:0.5rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(244,243,234,0.25);white-space:nowrap}
+        .reg-divider::before,.reg-divider::after{content:'';flex:1;height:1px;background:rgba(244,243,234,0.1)}
+        .reg-trust{
+            display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+        }
+        .reg-trust-item{
+            display:flex;align-items:center;gap:0.4rem;
+            font-family:'Aloe';font-size:0.5rem;letter-spacing:0.15em;
+            text-transform:uppercase;color:rgba(244,243,234,0.35);
+        }
+        .reg-trust-item svg{opacity:0.5;flex-shrink:0}
+
+        /* ═══ SCROLL MORPH TEXT ═══ */
+        #morphSection{height:350vh;position:relative;background:var(--pink)}
+        .morph-sticky{position:sticky;top:0;height:100vh;height:100dvh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .morph-bg-line{position:absolute;inset:0;z-index:0;pointer-events:none;display:flex;align-items:center;justify-content:center}
+        .morph-bg-line span{font-family:'Libre';font-size:clamp(6rem,22vw,18rem);color:rgba(244,243,234,0.3);letter-spacing:-0.05em;white-space:nowrap;user-select:none}
+        .morph-content{position:relative;z-index:10;text-align:center;max-width:900px;padding:0 2rem}
+        .morph-label{font-family:'Aloe';font-size:0.6rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--red);margin-bottom:2rem;font-weight:bold}
+        .morph-word{font-family:'Libre';font-size:clamp(3rem,10vw,8rem);line-height:1;letter-spacing:-0.04em;color:var(--black);transition:all 0.5s cubic-bezier(0.16,1,0.3,1);position:relative}
+        .morph-word::after{content:'';display:block;width:60px;height:2px;background:var(--red);margin:1.5rem auto 0;transition:width 0.6s cubic-bezier(0.16,1,0.3,1)}
+        .morph-word.expanding::after{width:120px}
+        .morph-sub{font-family:'Aloe';font-size:clamp(0.85rem,1.8vw,1.1rem);letter-spacing:0.08em;color:rgba(21,23,20,0.7);margin-top:1.5rem;line-height:1.7;transition:opacity 0.5s,transform 0.5s cubic-bezier(0.16,1,0.3,1);max-width:500px;margin-left:auto;margin-right:auto}
+        .morph-progress{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);display:flex;gap:0.5rem;z-index:10}
+        .morph-dot{width:24px;height:2px;background:rgba(21,23,20,0.15);border-radius:1px;transition:background 0.4s,width 0.4s}
+        .morph-dot.active{background:var(--red);width:40px}
+
+        /* ═══ SUCCESS OVERLAY ═══ */
+        .form-success-overlay{
+            position:fixed;inset:0;z-index:9000;
+            background:rgba(21,23,20,0.95);
+            backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+            display:flex;align-items:center;justify-content:center;padding:2rem;
+            opacity:0;visibility:hidden;transition:all 0.5s cubic-bezier(0.16,1,0.3,1)
+        }
+        .form-success-overlay.open{opacity:1;visibility:visible}
+        .success-card{
+            background:var(--cream);max-width:480px;width:100%;
+            padding:4rem 3rem;text-align:center;
+            transform:translateY(50px) scale(0.95);
+            transition:transform 0.7s cubic-bezier(0.16,1,0.3,1) 0.1s;
+            border-radius:8px;
+            position:relative;overflow:hidden;
+        }
+        .success-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:4px;
+            background:linear-gradient(90deg,var(--pink),var(--red),var(--pink));
+        }
+        .form-success-overlay.open .success-card{transform:translateY(0) scale(1)}
+        .success-confetti{
+            position:absolute;top:0;left:0;right:0;height:180px;
+            overflow:hidden;pointer-events:none;
+        }
+        .success-confetti i{
+            position:absolute;top:-10px;width:8px;height:8px;border-radius:2px;
+            animation:confettiFall 2s ease-in forwards;
+        }
+        .success-confetti i:nth-child(1){left:10%;background:var(--pink);animation-delay:0.4s;transform:rotate(20deg)}
+        .success-confetti i:nth-child(2){left:25%;background:var(--yellow);animation-delay:0.6s;width:6px;height:12px}
+        .success-confetti i:nth-child(3){left:40%;background:var(--red);animation-delay:0.3s;transform:rotate(-15deg)}
+        .success-confetti i:nth-child(4){left:55%;background:var(--green-light);animation-delay:0.7s;border-radius:50%}
+        .success-confetti i:nth-child(5){left:70%;background:var(--pink);animation-delay:0.5s;width:10px;height:6px}
+        .success-confetti i:nth-child(6){left:85%;background:var(--yellow);animation-delay:0.45s;transform:rotate(40deg)}
+        .success-confetti i:nth-child(7){left:18%;background:var(--blue-light);animation-delay:0.8s;border-radius:50%;width:6px;height:6px}
+        .success-confetti i:nth-child(8){left:63%;background:var(--red);animation-delay:0.55s;height:12px;width:4px}
+        @keyframes confettiFall{
+            0%{transform:translateY(0) rotate(0);opacity:1}
+            100%{transform:translateY(200px) rotate(360deg);opacity:0}
+        }
+        .success-stars{display:flex;justify-content:center;gap:0.6rem;margin-bottom:1.2rem}
+        .success-stars span{color:var(--yellow);font-size:1.4rem;opacity:0;transform:scale(0) rotate(-30deg);transition:all 0.5s cubic-bezier(0.36,0.07,0.19,0.97)}
+        .form-success-overlay.open .success-stars span{opacity:1;transform:scale(1) rotate(0)}
+        .form-success-overlay.open .success-stars span:nth-child(1){transition-delay:0.3s}
+        .form-success-overlay.open .success-stars span:nth-child(2){transition-delay:0.45s}
+        .form-success-overlay.open .success-stars span:nth-child(3){transition-delay:0.6s}
+        .success-emoji{font-size:4rem;display:block;margin-bottom:1rem;opacity:0;transform:scale(0.3);transition:all 0.7s cubic-bezier(0.36,0.07,0.19,0.97) 0.2s}
+        .form-success-overlay.open .success-emoji{opacity:1;transform:scale(1)}
+        .success-card h3{font-family:'Libre';font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-0.04em;line-height:1.1;color:var(--black);margin-bottom:1rem}
+        .success-card h3 span{color:var(--pink)}
+        .success-card p{font-family:'Aloe';font-size:0.7rem;letter-spacing:0.06em;color:rgba(21,23,20,0.58);line-height:1.9;margin-bottom:2rem}
+        .success-wa-note{
+            font-family:'Aloe';font-size:0.55rem;letter-spacing:0.1em;
+            color:rgba(21,23,20,0.4);margin-bottom:2rem;
+            background:rgba(21,23,20,0.04);padding:0.8rem 1rem;border-radius:4px;
+        }
+        .success-close{
+            font-family:'Aloe';font-size:0.65rem;letter-spacing:0.3em;text-transform:uppercase;
+            padding:1.2rem 3rem;background:var(--black);color:var(--cream);border:none;cursor:pointer;
+            transition:all 0.3s;border-radius:4px;font-weight:bold;
+        }
+        .success-close:hover{background:var(--pink);color:var(--black)}
+
+        /* ═══ FOOTER ═══ */
+        footer{background:var(--card);color:var(--black);padding:5rem 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem;align-items:start}
+        @media(max-width:768px){footer{grid-template-columns:1fr;text-align:center}}
+        footer img{height:40px;filter:brightness(0);opacity:0.8}
+        .foot-col{display:flex;flex-direction:column;gap:0.8rem}
+        .foot-col h5{font-family:'Aloe';font-size:0.55rem;letter-spacing:0.4em;text-transform:uppercase;color:rgba(21,23,20,0.5);margin-bottom:0.3rem;font-weight:bold}
+        .foot-col a{font-family:'Aloe';font-size:0.75rem;letter-spacing:0.1em;color:var(--black);text-decoration:none;transition:color 0.3s;cursor:pointer}
+        .foot-col a:hover{color:var(--red)}
+        .foot-copy{font-family:'Aloe';font-size:0.5rem;letter-spacing:0.15em;color:rgba(21,23,20,0.4);text-transform:uppercase;grid-column:1/-1;text-align:center;margin-top:3rem;border-top:1px solid rgba(21,23,20,0.1);padding-top:2rem}
+
+        /* ═══ REVEAL ANIMATIONS ═══ */
+        .rv{opacity:0;transform:translateY(30px);transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)}
+        .rv.vis{opacity:1;transform:translateY(0)}
+        .rv-d1{transition-delay:0.1s}
+        .rv-d2{transition-delay:0.2s}
+        .rv-d3{transition-delay:0.3s}
+        .rv-d4{transition-delay:0.4s}
+        .rv-d5{transition-delay:0.5s}
+
+        /* ═══ GRAIN ═══ */
+        body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.02;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:180px}
+    </style>
+</head>
+<body>
+
+<div class="ticker">
+    <div class="ticker-track">
+        <span>La Biblia y Nosotras</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Arena CDMX</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>15 de Agosto</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Movimiento de Fe</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Embajadoras</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>La Biblia y Nosotras</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Arena CDMX</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>15 de Agosto</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Movimiento de Fe</span><span class="dot">&nbsp;✦&nbsp;</span>
+        <span>Embajadoras</span><span class="dot">&nbsp;✦&nbsp;</span>
+    </div>
+</div>
+
+<nav id="nav">
+    <a href="#" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">
+        <img src="LaBibliayNosotras-03.webp" alt="La Biblia y Nosotras" class="nav-logo">
+    </a>
+    <div class="nav-r">
+        <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" rel="noopener" class="nav-btn">Instagram</a>
+        <a href="#registro" class="nav-btn accent" id="navRegistro">Registro</a>
+    </div>
+</nav>
+
+<div id="pageLanding" class="page page-active">
+
+    <section id="hero">
+        <div class="hero-left" id="heroVideoContainer">
+            <img src="poster.webp" alt="La Biblia y Nosotras" class="hero-poster" id="heroPoster">
+            <video id="heroVideo" loop muted playsinline preload="none" poster="poster.webp"></video>
+        </div>
+        <div class="hero-right">
+            <img src="logo.webp" alt="La Biblia y Nosotras" class="logo-big">
+            <span class="hero-tag">Arena CDMX — 15 de Agosto</span>
+            
+            <div class="hero-counter" id="counter">
+                <div class="counter-block">
+                    <div class="counter-num" data-target="15">0</div>
+                    <div class="counter-label">Agosto</div>
+                </div>
+                <div class="counter-block">
+                    <div class="counter-num" data-target="1">0</div>
+                    <div class="counter-label">Arena</div>
+                </div>
+                <div class="counter-block">
+                    <div class="counter-num" id="countdown-days">—</div>
+                    <div class="counter-label">Días restantes</div>
+                </div>
+            </div>
+            <div class="cta-row">
+                <a href="#registro" class="hero-cta primary">Quiero Ser Embajadora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="embajadora">
+        <div class="emb-img-side" id="credentialStage">
+            <div class="spotlight"></div>
+            <div class="cred-scene">
+                <div class="cred-card" id="credCard">
+                    <div class="cred-inner">
+                        <div class="cred-hole"></div>
+                        <div class="cred-logo-row">
+                            <img src="logo.webp" alt="La Biblia y Nosotras" style="height:38px;filter:brightness(0) invert(1);opacity:0.95;" loading="lazy">
+                        </div>
+                        <div class="cred-photo">
+                            <span class="cred-photo-placeholder">Tu<br>foto</span>
+                        </div>
+                        <div class="cred-name">TU NOMBRE</div>
+                        <div class="cred-role">E M B A J A D O R A</div>
+                        <div class="cred-bottom">
+                            <div class="cred-venue">ARENA<br>CDMX</div>
+                            <div class="cred-qr"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="emb-content">
+            <p class="emb-tag rv">Acceso Exclusivo — Fase 1</p>
+            <h2 class="emb-h rv rv-d1">Sé parte del<br><span>primer círculo.</span></h2>
+            <div class="feat-list">
+                <div class="feat rv rv-d1">
+                    <span class="feat-n">01</span>
+                    <div><h4>Encuentros Previos</h4><p>Dos sesiones íntimas para preparar el corazón antes de la Arena.</p></div>
+                </div>
+                <div class="feat rv rv-d2">
+                    <span class="feat-n">02</span>
+                    <div><h4>Zona Reservada</h4><p>Tu lugar en la arena (hasta el frente), junto a quienes levantan este movimiento.</p></div>
+                </div>
+                <div class="feat rv rv-d3">
+                    <span class="feat-n">03</span>
+                    <div><h4>Acceso Preferencial</h4><p>Entrada prioritaria. Sin filas. Sin espera.</p></div>
+                </div>
+                <div class="feat rv rv-d4">
+                    <span class="feat-n">04</span>
+                    <div><h4>Material para el evento</h4><p>Recibirás todo lo necesario para vivir la experiencia al máximo el día del evento.</p></div>
+                </div>
+                <div class="feat rv rv-d5">
+                    <span class="feat-n">05</span>
+                    <div><h4>Regalo Exclusivo</h4><p>Al invitar a 20 mujeres, recibirás un detalle oficial y exclusivo del evento.</p></div>
+                </div>
+            </div>
+            <div class="emb-mission rv">
+                <p class="quote">"Yo iré y lo anunciaré."</p>
+                <p class="detail">Tu misión: invitar al menos a 20 mujeres.</p>
+            </div>
+            <a href="#registro" class="emb-cta rv" onclick="selectLevel('Embajadora')">Aceptar el Llamado</a>
+        </div>
+    </section>
+
+    <section id="registro">
+        <div class="reg-glow"></div>
+        <div class="reg-glow2"></div>
+        
+        <div class="paparazzi-fx">
+            <div class="flash flash-1"></div>
+            <div class="flash flash-2"></div>
+            <div class="flash flash-3"></div>
+            <div class="flash flash-4"></div>
+            <div class="flash flash-5"></div>
+        </div>
+
+        <div class="reg-container">
+            <div class="reg-header rv">
+                <span class="reg-eyetag">Acceso Exclusivo — Fase 1</span>
+                <h2 class="reg-heading">Sé parte del<br><span>primer círculo.</span></h2>
+                <p class="reg-sub">Completa tu solicitud. Al enviar, confirmaremos tu lugar al instante.</p>
+            </div>
+            <form id="leadForm" class="reg-form rv rv-d1" novalidate>
+                <div class="reg-field">
+                    <label for="reg-nombre">Nombre completo</label>
+                    <input id="reg-nombre" type="text" name="Nombre" placeholder="Tu nombre completo" required autocomplete="name">
+                    <div class="field-error">Ingresa tu nombre completo</div>
+                </div>
+
+                <div class="reg-field">
+                    <label for="reg-wa">WhatsApp</label>
+                    <input id="reg-wa" type="tel" name="WhatsApp" placeholder="55 1234 5678" required autocomplete="tel" inputmode="numeric" maxlength="15">
+                    <div class="field-error">Ingresa un número válido (10 dígitos)</div>
+                </div>
+
+                <div class="reg-field">
+                    <label for="reg-correo">Email</label>
+                    <input id="reg-correo" type="email" name="Email" placeholder="correo@ejemplo.com" required autocomplete="email">
+                    <div class="field-error">Ingresa un email válido</div>
+                </div>
+
+                <div class="reg-field">
+                    <label for="reg-participacion">¿Cómo quieres participar?</label>
+                    <select name="Participacion" id="reg-participacion" required>
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="Comprar boletos">Comprar boletos</option>
+                        <option value="Ser embajadora">Ser embajadora</option>
+                        <option value="Solo quiero informacion">Solo quiero información</option>
+                    </select>
+                    <div class="field-error">Selecciona una opción</div>
+                </div>
+
+                <div class="reg-field">
+                    <label for="reg-fuente">¿Cómo te enteraste de nosotros?</label>
+                    <select name="Fuente" id="reg-fuente" required onchange="toggleEmbajadoraCode(this.value)">
+                        <option value="" disabled selected>Selecciona una opción</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Iglesia">Iglesia</option>
+                        <option value="Amiga">Amiga</option>
+                        <option value="Embajadora">Embajadora</option>
+                    </select>
+                    <div class="field-error">Selecciona una opción</div>
+                </div>
+
+                <div class="reg-field" id="embajadoraCodeWrap" style="display:none;margin-top:-0.4rem">
+                    <label for="reg-cod-emb">Ingresa el código de la embajadora</label>
+                    <input id="reg-cod-emb" type="text" name="CodigoEmbajadora" placeholder="Ej. EMB-KARLA" style="text-transform:uppercase;letter-spacing:0.1em">
+                </div>
+
+                <button type="submit" class="reg-submit" id="regSubmitBtn">
+                    Enviar →
+                </button>
+                
+                <div class="reg-divider"><span>incluye</span></div>
+                <div class="reg-trust">
+                    <span class="reg-trust-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Zona Reservada
+                    </span>
+                    <span class="reg-trust-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Entrada Prioritaria
+                    </span>
+                    <span class="reg-trust-item">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Regalo Exclusivo
+                    </span>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="morphSection">
+        <div class="morph-sticky">
+            <div class="morph-bg-line"><span id="morphBgWord">PALABRA</span></div>
+            <div class="morph-content">
+                <p class="morph-label">Nuestro Manifiesto</p>
+                <div class="morph-word" id="morphWord">Palabra</div>
+                <p class="morph-sub" id="morphSub">Todo comenzó con una Biblia abierta y un corazón dispuesto.</p>
+            </div>
+            <div class="morph-progress" id="morphDots"></div>
+        </div>
+    </section>
+    
+</div>
+
+<footer>
+    <div><img src="logo.webp" alt="La Biblia y Nosotras" loading="lazy"></div>
+    <div class="foot-col">
+        <h5>Conecta</h5>
+        <a href="https://www.instagram.com/labibliaynosotras/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/5215511382278" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+    <div class="foot-col">
+        <h5>Evento</h5>
+        <a href="#embajadora">Embajadoras</a>
+        <a href="#registro">Registro</a>
+    </div>
+    <p class="foot-copy">© 2026 La Biblia y Nosotras. Todos los derechos reservados.</p>
+</footer>
+
+<div id="formSuccess" class="form-success-overlay">
+    <div class="success-card">
+        <div class="success-confetti">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="success-stars"><span>✦</span><span>✦</span><span>✦</span></div>
+        <span class="success-emoji">🎉</span>
+        <h3>¡Bienvenida al<br><span>primer círculo!</span></h3>
+        <p>Tu solicitud fue enviada con éxito. Eres parte de algo especial — prepárate para vivir La Biblia y Nosotras en la Arena CDMX el 15 de Agosto 2026.</p>
+        <div class="success-wa-note">📲 Tu registro fue recibido. En unos segundos te llegará un mensaje de WhatsApp de nuestra parte al número que registraste.<br><br>🎟️ <strong>Te estamos redirigiendo a SuperBoletos</strong> para que asegures tu lugar. Si no se abre automáticamente, <a href="https://www.superboletos.com/landing-evento/4lstBqD-3YdArDsuzo1SUQ" target="_blank" style="color:var(--pink);text-decoration:underline;font-weight:bold">haz clic aquí</a>.</div>
+        <button class="success-close" onclick="closeSuccess()">¡Listo! Continuar →</button>
+    </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════
+   VIDEO HERO — CONTROL INTELIGENTE
+═══════════════════════════════════════════ */
+(function(){
+    const video = document.getElementById('heroVideo');
+    const poster = document.getElementById('heroPoster');
+    const container = document.getElementById('heroVideoContainer');
+    if(!video || !container) return;
+
+    /* --- Detección de capacidad --- */
+    const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const isSlow = conn && (conn.saveData || conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g');
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lowMemory = navigator.deviceMemory && navigator.deviceMemory <= 2;
+
+    /* --- Si conexión lenta o dispositivo bajo → solo imagen --- */
+    if(isSlow || lowMemory || prefersReduced){
+        video.remove();
+        return;
+    }
+
+    /* --- Carga diferida con IntersectionObserver --- */
+    function loadAndPlay(){
+        if(video.querySelector('source')) return;
+        /* video.webp es en realidad un MP4 renombrado — forzar tipo correcto */
+        var source = document.createElement('source');
+        source.src = 'video.webp';
+        source.type = 'video/mp4';
+        video.appendChild(source);
+        video.load();
+        var playAttempt = video.play();
+        if(playAttempt !== undefined){
+            playAttempt.then(function(){
+                if(poster) poster.classList.add('hidden');
+            }).catch(function(){
+                /* Autoplay bloqueado — mostrar poster */
+                if(poster) poster.classList.remove('hidden');
+                /* Intentar con interacción del usuario */
+                document.addEventListener('touchstart', function handler(){
+                    video.play().then(function(){
+                        if(poster) poster.classList.add('hidden');
+                    }).catch(function(){});
+                    document.removeEventListener('touchstart', handler);
+                }, {once:true, passive:true});
+            });
+        }
+    }
+
+    function pauseVideo(){
+        if(!video.paused) video.pause();
+    }
+
+    if('IntersectionObserver' in window){
+        var obs = new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    loadAndPlay();
+                }
+                /* Ya NO pausamos al salir de vista — el video sigue corriendo */
+            });
+        }, {threshold: 0.25});
+        obs.observe(container);
+    } else {
+        /* Fallback sin IO */
+        window.addEventListener('load', loadAndPlay);
+    }
+
+    /* --- Manejo de errores de video --- */
+    video.addEventListener('error', function(){
+        video.style.display = 'none';
+        if(poster) poster.classList.remove('hidden');
+    });
+
+    /* --- Page Visibility: pausar cuando no visible --- */
+    document.addEventListener('visibilitychange', function(){
+        if(document.hidden){ pauseVideo(); }
+        else if(video.querySelector('source') && container.getBoundingClientRect().top < window.innerHeight){
+            video.play().catch(function(){});
+        }
+    });
+})();
+
+/* ═══════════════════════════════════════════
+   NAV SCROLL
+═══════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+    document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+/* ═══════════════════════════════════════════
+   COUNTDOWN
+═══════════════════════════════════════════ */
+(function countdown() {
+    const target = new Date('2026-08-15T00:00:00-06:00');
+    const diff = Math.max(0, Math.ceil((target - new Date()) / (1000 * 60 * 60 * 24)));
+    document.getElementById('countdown-days').textContent = diff;
+})();
+
+/* ═══════════════════════════════════════════
+   COUNTER ANIMATION
+═══════════════════════════════════════════ */
+(function animCounters() {
+    const nums = document.querySelectorAll('.counter-num[data-target]');
+    let done = false;
+    const obs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !done) {
+            done = true;
+            nums.forEach(n => {
+                const target = +n.dataset.target;
+                let current = 0;
+                const step = () => {
+                    current += Math.ceil(target / 30);
+                    if (current >= target) { n.textContent = target; return; }
+                    n.textContent = current;
+                    requestAnimationFrame(step);
+                };
+                step();
+            });
+        }
+    }, { threshold: 0.5 });
+    obs.observe(document.getElementById('counter'));
+})();
+
+/* ═══════════════════════════════════════════
+   REVEALS
+═══════════════════════════════════════════ */
+const rvObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
+
+/* ═══════════════════════════════════════════
+   SCROLL MORPH — MÁS ESPACIO PARA ANIMAR SUAVE
+═══════════════════════════════════════════ */
+(function() {
+    const section = document.getElementById('morphSection');
+    const wordEl = document.getElementById('morphWord');
+    const subEl = document.getElementById('morphSub');
+    const bgEl = document.getElementById('morphBgWord');
+    const dotsContainer = document.getElementById('morphDots');
+    if (!section || !wordEl) return;
+
+    const steps = [
+        { word: 'Palabra',     bg: 'PALABRA',     sub: 'Todo comenzó con una Biblia abierta y un corazón dispuesto.' },
+        { word: 'Encuentro',   bg: 'ENCUENTRO',   sub: 'No leer por obligación, sino por revelación.' },
+        { word: 'Identidad',   bg: 'IDENTIDAD',   sub: 'Cuando una mujer entiende la Palabra, sana quién es.' },
+        { word: 'Fe',          bg: 'FE',          sub: 'Fortalece lo que el mundo intenta debilitar.' },
+        { word: 'Generación',  bg: 'GENERACIÓN',  sub: 'Una mujer en la Palabra levanta a quienes vienen detrás.' },
+        { word: 'Movimiento',  bg: 'MOVIMIENTO',  sub: 'Esto no es un evento. Es un regreso al lugar donde Dios habla.' },
+    ];
+
+    steps.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'morph-dot' + (i === 0 ? ' active' : '');
+        dotsContainer.appendChild(dot);
+    });
+    const dots = dotsContainer.querySelectorAll('.morph-dot');
+    let currentIdx = -1;
+
+    function update() {
+        const rect = section.getBoundingClientRect();
+        const scrollable = section.offsetHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, -rect.top / scrollable));
+        const idx = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+        if (idx !== currentIdx) {
+            currentIdx = idx;
+            const step = steps[idx];
+            wordEl.style.opacity = '0'; wordEl.style.transform = 'translateY(15px)';
+            subEl.style.opacity = '0'; subEl.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                wordEl.textContent = step.word;
+                bgEl.textContent = step.bg;
+                subEl.textContent = step.sub;
+                wordEl.style.opacity = '1'; wordEl.style.transform = 'translateY(0)';
+                subEl.style.opacity = '1'; subEl.style.transform = 'translateY(0)';
+            }, 220);
+            wordEl.classList.toggle('expanding', idx % 2 === 1);
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+})();
+
+/* ═══════════════════════════════════════════
+   FORM & CREDENTIAL (n8n → Supabase → OpenAI → WhatsApp)
+═══════════════════════════════════════════ */
+function selectLevel(val) {
+    const sel = document.getElementById('reg-participacion');
+    if(sel) {
+        sel.value = val; 
+        sel.classList.add('hl');
+        setTimeout(() => sel.classList.remove('hl'), 2000);
+    }
+    document.getElementById('registro').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ── Mostrar/Ocultar Código de Embajadora ──────────────────────────
+function toggleEmbajadoraCode(val) {
+    const wrap = document.getElementById('embajadoraCodeWrap');
+    if (wrap) wrap.style.display = val === 'Embajadora' ? 'block' : 'none';
+}
+
+// ── UTM Tracking desde URL ─────────────────────────────────────────────
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    window._utmData = {
+        utm_source:     params.get('utm_source')     || '',
+        utm_medium:     params.get('utm_medium')     || '',
+        utm_campaign:   params.get('utm_campaign')   || '',
+        utm_embajadora: params.get('utm_embajadora') || ''
+    };
+    // Si viene código de embajadora en UTM, pre-rellenar el campo
+    if (window._utmData.utm_embajadora) {
+        const codField = document.getElementById('reg-cod-emb');
+        if (codField) codField.value = window._utmData.utm_embajadora.toUpperCase();
+    }
+})();
+
+// ── Validaciones ──────────────────────────────────────────────────────
+function cleanPhone(raw) {
+    return raw.replace(/\D/g, '');
+}
+
+function formatPhoneMX(input) {
+    let digits = cleanPhone(input.value);
+    // Si empieza con 52, quitarlo (el usuario no necesita ponerlo)
+    if (digits.startsWith('52') && digits.length > 10) digits = digits.slice(2);
+    // Si empieza con 1 después del 52, quitarlo también
+    if (digits.startsWith('1') && digits.length > 10) digits = digits.slice(1);
+    // Limitar a 10 dígitos
+    digits = digits.slice(0, 10);
+    // Formato visual: XX XXXX XXXX
+    let formatted = '';
+    if (digits.length > 0) formatted = digits.slice(0, 2);
+    if (digits.length > 2) formatted += ' ' + digits.slice(2, 6);
+    if (digits.length > 6) formatted += ' ' + digits.slice(6, 10);
+    input.value = formatted;
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function validateField(field) {
+    const parent = field.closest('.reg-field');
+    if (!parent) return true;
+    let valid = true;
+    if (field.tagName === 'SELECT') {
+        valid = field.value !== '';
+    } else if (field.type === 'email') {
+        valid = isValidEmail(field.value.trim());
+    } else if (field.type === 'tel') {
+        valid = cleanPhone(field.value).length === 10;
+    } else {
+        valid = field.value.trim().length >= 2;
+    }
+    parent.classList.toggle('has-error', !valid);
+    parent.classList.toggle('valid', valid);
+    return valid;
+}
+
+// Auto-formato teléfono en tiempo real
+document.getElementById('reg-wa').addEventListener('input', function() {
+    formatPhoneMX(this);
+});
+
+// Validación en blur para todos los campos
+document.querySelectorAll('#leadForm input, #leadForm select').forEach(field => {
+    field.addEventListener('blur', function() {
+        if (this.value) validateField(this);
+    });
+    field.addEventListener('input', function() {
+        const parent = this.closest('.reg-field');
+        if (parent && parent.classList.contains('has-error')) validateField(this);
+    });
+});
+
+// ── Listener del Formulario ────────────────────────────────────────────
+document.getElementById('leadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('regSubmitBtn');
+    const fields = this.querySelectorAll('input[required], select[required]');
+
+    // 1. Validar todos los campos
+    let allValid = true;
+    fields.forEach(f => { if (!validateField(f)) allValid = false; });
+    if (!allValid) {
+        const firstError = this.querySelector('.has-error input, .has-error select');
+        if (firstError) firstError.focus();
+        return;
+    }
+
+    // 2. Estado de carga
+    btn.disabled = true;
+    btn.classList.add('loading');
+    btn.textContent = 'Enviando…';
+
+    // 3. Recolección de datos
+    const fd = new FormData(this);
+    const data = Object.fromEntries(fd.entries());
+    if (data.CodigoEmbajadora) {
+        data.CodigoEmbajadora = data.CodigoEmbajadora.toUpperCase();
+    }
+
+    // 4. Normalizar teléfono a formato internacional MX
+    const phoneDigits = cleanPhone(data.WhatsApp);
+    const whatsappIntl = '521' + phoneDigits; // 52 = México, 1 = móvil
+
+    // 5. Payload limpio para n8n → Supabase → OpenAI → WhatsApp
+    const payload = {
+        nombre:           data.Nombre.trim(),
+        whatsapp:         whatsappIntl,
+        email:            data.Email.trim().toLowerCase(),
+        participacion:    data.Participacion,
+        fuente:           data.Fuente,
+        codigoEmbajadora: data.CodigoEmbajadora || '',
+        utm_source:       window._utmData.utm_source,
+        utm_medium:       window._utmData.utm_medium,
+        utm_campaign:     window._utmData.utm_campaign,
+        utm_embajadora:   window._utmData.utm_embajadora,
+        id_unico:         'LBN-' + Date.now() + '-' + Math.random().toString(36).slice(2,8).toUpperCase(),
+        timestamp:        new Date().toISOString()
+    };
+
+    // 6. Enviar a n8n Webhook (n8n se encarga de reenviar a Airtable CRM de forma segura)
+    // NOTA: El token de Airtable NUNCA debe ir en el frontend — n8n lo maneja del lado servidor
+    payload.airtable_tipo   = payload.participacion === 'Ser embajadora' ? 'embajadora' : 'publico';
+    payload.airtable_status = 'registrado';
+    try {
+        const resp = await fetch('https://iadigital.app.n8n.cloud/webhook/registro', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(payload)
+        });
+        if (!resp.ok) console.warn('n8n respondió con status:', resp.status);
+    } catch (err) {
+        console.error('Error enviando a n8n:', err);
+    }
+
+    // 7. Mostrar éxito visual
+    document.getElementById('formSuccess').classList.add('open');
+
+    // 8. Resetear formulario y botón
+    this.reset();
+    document.querySelectorAll('.reg-field').forEach(f => {
+        f.classList.remove('has-error', 'valid');
+    });
+    document.getElementById('embajadoraCodeWrap').style.display = 'none';
+    btn.disabled = false;
+    btn.classList.remove('loading');
+    btn.textContent = 'Enviar →';
+
+    // 9. Redirigir a SuperBoletos después de 3 segundos para que vean el mensaje de éxito
+    setTimeout(function() {
+        window.open('https://www.superboletos.com/landing-evento/4lstBqD-3YdArDsuzo1SUQ', '_blank');
+    }, 3000);
+});
+
+function closeSuccess() {
+    document.getElementById('formSuccess').classList.remove('open');
+}
+
+/* 3D Tilt Credential */
+(function() {
+    const stage = document.getElementById('credentialStage');
+    const card = document.getElementById('credCard');
+    if (!stage || !card) return;
+    stage.addEventListener('mousemove', function(e) {
+        const rect = stage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `rotateY(${x * 20}deg) rotateX(${-y * 15}deg) scale(1.03)`;
+        card.style.transition = 'transform 0.1s ease';
+    });
+    stage.addEventListener('mouseleave', function() {
+        card.style.transform = 'rotateY(-6deg) rotateX(3deg) rotate(-3deg)';
+        card.style.transition = 'transform 0.7s cubic-bezier(0.16,1,0.3,1)';
+    });
+})();
+</script>
+</body>
+</html>
